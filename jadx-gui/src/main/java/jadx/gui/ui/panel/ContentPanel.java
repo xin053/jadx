@@ -16,9 +16,9 @@ public abstract class ContentPanel extends JPanel {
 	protected TabbedPane tabbedPane;
 	protected JNode node;
 
-	protected ContentPanel(TabbedPane panel, JNode jnode) {
+	protected ContentPanel(TabbedPane panel, JNode node) {
 		tabbedPane = panel;
-		node = jnode;
+		this.node = node;
 	}
 
 	public abstract void loadSettings();
@@ -39,15 +39,19 @@ public abstract class ContentPanel extends JPanel {
 	 */
 	@Nullable
 	public String getTabTooltip() {
-		JClass jClass = node.getRootClass();
+		JClass jClass = getNode().getRootClass();
 		if (jClass != null) {
 			return jClass.getFullName();
 		}
-		return node.getName();
+		return getNode().getName();
 	}
 
 	public JadxSettings getSettings() {
 		return tabbedPane.getMainWindow().getSettings();
+	}
+
+	public boolean supportsQuickTabs() {
+		return getNode().supportsQuickTabs();
 	}
 
 	public void dispose() {

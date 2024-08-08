@@ -8,10 +8,19 @@ public class EditorViewState {
 	public static final Point ZERO = new Point(0, 0);
 
 	private final JNode node;
-	private final int caretPos;
-	private final Point viewPoint;
-	private final String subPath;
+	private int caretPos;
+	private Point viewPoint;
+	private String subPath;
+
 	private boolean active;
+
+	private boolean pinned;
+	private boolean bookmarked;
+	private boolean hidden;
+
+	public EditorViewState(JNode node) {
+		this(node, "", 0, EditorViewState.ZERO);
+	}
 
 	public EditorViewState(JNode node, String subPath, int caretPos, Point viewPoint) {
 		this.node = node;
@@ -28,12 +37,24 @@ public class EditorViewState {
 		return caretPos;
 	}
 
+	public void setCaretPos(int caretPos) {
+		this.caretPos = caretPos;
+	}
+
 	public Point getViewPoint() {
 		return viewPoint;
 	}
 
+	public void setViewPoint(Point viewPoint) {
+		this.viewPoint = viewPoint;
+	}
+
 	public String getSubPath() {
 		return subPath;
+	}
+
+	public void setSubPath(String subPath) {
+		this.subPath = subPath;
 	}
 
 	public boolean isActive() {
@@ -42,6 +63,30 @@ public class EditorViewState {
 
 	public void setActive(boolean active) {
 		this.active = active;
+	}
+
+	public boolean isPinned() {
+		return pinned;
+	}
+
+	public void setPinned(boolean pinned) {
+		this.pinned = pinned;
+	}
+
+	public boolean isBookmarked() {
+		return bookmarked;
+	}
+
+	public void setBookmarked(boolean bookmarked) {
+		this.bookmarked = bookmarked;
+	}
+
+	public boolean isHidden() {
+		return hidden;
+	}
+
+	public void setHidden(boolean hidden) {
+		this.hidden = hidden;
 	}
 
 	@Override

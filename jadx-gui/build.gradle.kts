@@ -2,7 +2,7 @@ plugins {
 	id("jadx-kotlin")
 	id("application")
 	id("edu.sc.seis.launch4j") version "3.0.6"
-	id("com.github.johnrengelman.shadow") version "8.1.1"
+	id("com.gradleup.shadow") version "8.3.0"
 	id("org.beryx.runtime") version "1.13.1"
 }
 
@@ -32,12 +32,12 @@ dependencies {
 	implementation(files("libs/jfontchooser-1.0.5.jar"))
 	implementation("hu.kazocsaba:image-viewer:1.2.3")
 
-	implementation("com.formdev:flatlaf:3.5")
-	implementation("com.formdev:flatlaf-intellij-themes:3.5")
-	implementation("com.formdev:flatlaf-extras:3.5")
+	implementation("com.formdev:flatlaf:3.5.1")
+	implementation("com.formdev:flatlaf-intellij-themes:3.5.1")
+	implementation("com.formdev:flatlaf-extras:3.5.1")
 
 	implementation("com.google.code.gson:gson:2.11.0")
-	implementation("org.apache.commons:commons-lang3:3.14.0")
+	implementation("org.apache.commons:commons-lang3:3.16.0")
 	implementation("org.apache.commons:commons-text:1.12.0")
 	implementation("commons-io:commons-io:2.16.1")
 
@@ -70,6 +70,12 @@ application {
 			// needed for ktlint formatter
 			"-XX:+IgnoreUnrecognizedVMOptions",
 			"--add-opens=java.base/java.lang=ALL-UNNAMED",
+			// flags to fix UI ghosting (#2225)
+			"-Dsun.java2d.noddraw=true",
+			"-Dsun.java2d.d3d=false",
+			"-Dsun.java2d.ddforcevram=true",
+			"-Dsun.java2d.ddblit=false",
+			"-Dswing.useflipBufferStrategy=True",
 		)
 	applicationDistribution.from("$rootDir") {
 		include("README.md")

@@ -32,4 +32,9 @@ public class StartPageNode extends JNode {
 	public JClass getJParent() {
 		return null;
 	}
+
+	@Override
+	public boolean supportsQuickTabs() {
+		return false;
+	}
 }
